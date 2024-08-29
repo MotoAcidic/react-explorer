@@ -17,7 +17,7 @@
     "module": "ESNext",
     "declaration": true,               // Enable declaration file generation
     "declarationMap": true,            // Generate map files for declaration files
-    "outDir": "./dist"                 // Output directory for compiled files
+    // "outDir": "./dist"                 // Output directory for compiled files
   },
   "include": [
     "src/**/*",
