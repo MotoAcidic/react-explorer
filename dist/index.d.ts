@@ -1,6 +1,0 @@
-export { default as ChainSelector } from './components/chain-selector/LegacyChainSelector';
-export { default as SearchBar } from './components/search-bar/LegacySearchBar';
-export { default as SideNavbar } from './components/side-navbar/LegacySideNavBar';
-export { default as Tables } from './components/tables/LegacyTables';
-export { default as TopNavbar } from './components/top-navbar/LegacyTopNavBar';
-//# sourceMappingURL=index.d.ts.map
