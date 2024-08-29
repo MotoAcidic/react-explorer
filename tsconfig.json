@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,                   // Changed to false to enable emitting compiled files
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "declaration": true,               // Enable declaration file generation
+    "declarationMap": true,            // Generate map files for declaration files
+    "outDir": "./dist"                 // Output directory for compiled files
+  },
+  "include": [
+    "src/**/*",
+    "src/css.d.ts"                    // Include the custom type declaration file
+  ],
+  "exclude": ["node_modules"]
+}

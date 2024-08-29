@@ -1,0 +1,21 @@
+/* src/components/tables/Tables.module.css */
+.tableContainer {
+    padding: 16px;
+    background-color: #fff;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f7f7f7;
+  }
+  
