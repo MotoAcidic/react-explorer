@@ -1,11 +1,77 @@
-/* src/components/chain-selector/ChainSelector.module.css */
 .container {
-    padding: 16px;
-    background-color: #f0f0f0;
+  padding: 16px;
+  background-color: #333;
+  color: #997a7a;
+  display: flex;
+  width: auto;
+  max-width: 300px;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.center {
+  justify-content: center;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #997a7a;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown li {
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.dropdown li:last-child {
+  border-bottom: none;
+}
+
+.dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.chain-name {
+  display: inline;
+}
+
+@media (max-width: 600px) {
+  .chain-name {
+    display: none;
   }
-  
-  .title {
-    font-size: 24px;
-    color: #333;
+}
+
+.dropdown li .chain-name {
+  display: inline;
+}
+
+@media (max-width: 600px) {
+  .dropdown li .chain-name {
+    display: none; /* Hides the name inside the dropdown items on small screens */
   }
-  
+}
+
