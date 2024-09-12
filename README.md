@@ -19,7 +19,7 @@ Usage
 Import and use the components in your Next.js application like so:
 
 ```bash
-import { ChainSelector, SearchBar, SideNavbar, Tables, TopNavbar } from 'react-explorer';
+import { ChainSelector, SearchBar, SideNavbar, Tables, TopNavbar } from '@tw3/react-explorer';
 
 function App() {
   return (

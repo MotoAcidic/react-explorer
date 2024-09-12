@@ -1,6 +1,7 @@
 node_modules
 dist
 *.ts
+!index.ts
 *.ts.map
 *.js
 /explorer-testing
