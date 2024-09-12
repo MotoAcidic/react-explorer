@@ -3,75 +3,68 @@
   background-color: #333;
   color: #997a7a;
   display: flex;
-  width: auto;
+  width: fit-content; /* Adjust width to fit content */
   max-width: 300px;
   position: relative;
-  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .left {
-  justify-content: flex-start;
+  border-radius: 0 8px 8px 0;
 }
 
 .right {
-  justify-content: flex-end;
+  border-radius: 8px 0 0 8px;
 }
 
 .center {
-  justify-content: center;
+  border-radius: 8px;
 }
 
+/* Dropdown menu */
 .dropdown {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%;
   background-color: #fff;
   border: 1px solid #997a7a;
-  border-radius: 8px;
   z-index: 1000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  width: fit-content; /* Adjust width to content */
+  min-width: fit-content;
+  max-width: 100%; /* Prevent overflow */
 }
 
+/* Each list item */
 .dropdown li {
   padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
+/* Logo size */
 .dropdown img {
   width: 20px;
   height: 20px;
   margin-right: 8px;
 }
 
-.dropdown li:last-child {
-  border-bottom: none;
-}
-
-.dropdown li:hover {
-  background-color: #f0f0f0;
-}
-
-.chain-name {
-  display: inline;
-}
-
+/* For mobile screens, only show logo and shrink to logo size */
 @media (max-width: 600px) {
+  .dropdown {
+    width: fit-content; /* Shrink dropdown to fit logo size */
+    min-width: fit-content; /* Shrink dropdown width further */
+  }
+
+  .container {
+    width: fit-content; /* Ensure container shrinks to logo size */
+  }
+
   .chain-name {
-    display: none;
+    display: none; /* Hide text on small screens */
   }
 }
-
-.dropdown li .chain-name {
-  display: inline;
-}
-
-@media (max-width: 600px) {
-  .dropdown li .chain-name {
-    display: none; /* Hides the name inside the dropdown items on small screens */
-  }
-}
-
