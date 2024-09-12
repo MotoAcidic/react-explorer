@@ -8,18 +8,13 @@ You can install the package via npm:
 
 ```bash
 npm install @tw3/react-explorer
-
-Or via yarn:
-
-yarn add react-explorer
-
 ```
 
 Usage
 Import and use the components in your Next.js application like so:
 
 ```bash
-import { ChainSelector, SearchBar, SideNavbar, Tables, TopNavbar } from 'react-explorer';
+import { ChainSelector, SearchBar, SideNavbar, Tables, TopNavbar } from '@tw3/react-explorer';
 
 function App() {
   return (
