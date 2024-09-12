@@ -3,3 +3,4 @@ dist
 *.ts
 *.ts.map
 *.js
+/explorer-testing

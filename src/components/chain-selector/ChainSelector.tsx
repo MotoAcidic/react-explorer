@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import supportedNetworks from '../../supportedNetworks.json';
 import styles from './ChainSelector.module.css';
 
@@ -13,7 +13,9 @@ interface Chain {
 export default function ChainSelector({ inline }: { inline?: 'left' | 'right' }) {
   const [selectedChain, setSelectedChain] = useState<Chain | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Load saved chain from local storage
   useEffect(() => {
     const savedChain = localStorage.getItem('selectedChain');
     if (savedChain) {
@@ -29,10 +31,25 @@ export default function ChainSelector({ inline }: { inline?: 'left' | 'right' })
     localStorage.setItem('selectedChain', JSON.stringify(network));
   };
 
-  const alignmentClass = inline === 'left' ? styles.left : inline === 'right' ? styles.right : styles.center;
+  // Close dropdown if clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
+
+  // Allow left or right alignment, defaults to center if nothing is assigned
+  const alignmentClass =
+    inline === 'left' ? styles.left : inline === 'right' ? styles.right : styles.center;
 
   return (
-    <div className={`${styles.container} ${alignmentClass}`}>
+    <div className={`${styles.container} ${alignmentClass}`} ref={dropdownRef}>
       <div
         style={{
           display: 'flex',
@@ -59,13 +76,6 @@ export default function ChainSelector({ inline }: { inline?: 'left' | 'right' })
             <li
               key={network.chain.name}
               onClick={() => handleSelect(network.chain)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                padding: '8px',
-                cursor: 'pointer',
-                backgroundColor: selectedChain?.name === network.chain.name ? '#f0f0f0' : 'white',
-              }}
             >
               <img
                 src={network.chain.icon}
