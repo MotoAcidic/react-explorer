@@ -7,7 +7,7 @@
 You can install the package via npm:
 
 ```bash
-npm install react-explorer
+npm install @TW3/react-explorer
 
 Or via yarn:
 
