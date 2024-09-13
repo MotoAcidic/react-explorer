@@ -1,11 +1,11 @@
+/* Container and alignment styling */
 .container {
   padding: 16px;
   background-color: #333;
   color: #997a7a;
   display: flex;
-  width: fit-content; /* Adjust width to fit content */
-  max-width: 300px;
   position: relative;
+  width: 300px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
@@ -19,15 +19,32 @@
 }
 
 .center {
-  border-radius: 8px;
+  border-radius: center;
 }
 
-/* Dropdown menu */
+/* Styling for selected chain */
+.selected-chain {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  color: #997a7a;
+  padding: 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.selected-chain img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* Dropdown menu styling */
 .dropdown {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #fff;
+  background-color: #333;
   border: 1px solid #997a7a;
   z-index: 1000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -35,18 +52,24 @@
   width: fit-content; /* Adjust width to content */
   min-width: fit-content;
   max-width: 100%; /* Prevent overflow */
+  border-radius: 8px;
 }
 
-/* Each list item */
 .dropdown li {
   padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  white-space: nowrap; /* Prevent text wrapping */
+  color: #997a7a;
+  background-color: #333;
+  border-radius: 8px;
+  white-space: nowrap;
 }
 
-/* Logo size */
+.dropdown li:hover {
+  background-color: #555;
+}
+
 .dropdown img {
   width: 20px;
   height: 20px;
