@@ -46,6 +46,7 @@ export type Chain = {
     rpcUrl?: string;
     apiUrl?: string;
     nativeCurrency: {
+        name: string;
         symbol: string;
         decimals: number;
     };
