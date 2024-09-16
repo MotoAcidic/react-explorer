@@ -26,12 +26,12 @@ export type SupportedEndpoints = {
     [key: string]: EndpointConfig;
 };
 
-
 // Update the Chain type to include supportedEndpoints
 export type Network = {
     name: string;
     transactionTypes: SupportedTypes[];
     addressPattern?: RegExp;
+    transactionPattern?: RegExp;
     checksumAddress?: (address: string) => string;
     supportsSmartContracts?: boolean;
 };
@@ -42,6 +42,7 @@ export type Chain = {
     network: Network;
     chainId?: number;
     addressPattern?: RegExp;
+    transactionPattern?: RegExp;
     explorerUrl?: string;
     rpcUrl?: string;
     apiUrl?: string;

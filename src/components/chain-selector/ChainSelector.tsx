@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useMemo } from 'react';
 import styles from './ChainSelector.module.css';
-import { Chain } from '../../interfaces/Chain'; // Import the types here
+import { Chain } from '../../interfaces/Chain';
 
 interface ChainSelectorProps {
   chainList: Chain[];
@@ -14,7 +14,6 @@ export default function ChainSelector({ chainList, inline }: ChainSelectorProps)
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Memoize the validChains to avoid recalculating on every render
   const validChains = useMemo(() => {
     return chainList.filter(chain => {
       return (
@@ -30,19 +29,14 @@ export default function ChainSelector({ chainList, inline }: ChainSelectorProps)
   }, [chainList]);
 
   useEffect(() => {
-    if (!validChains || validChains.length === 0) {
-      console.error('Error: No valid chains available.');
-      return;
-    }
-
     const savedChain = localStorage.getItem('selectedChain');
     if (savedChain) {
       setSelectedChain(JSON.parse(savedChain));
     } else {
-      setSelectedChain(validChains[0]); // Default to the first valid chain
+      // Default to the first valid chain
+      setSelectedChain(validChains[0]);
     }
-
-    console.log('Selected chain on load:', validChains[0]);
+    console.log('Selected chain on load:', selectedChain);
   }, [validChains]);
 
   const handleSelect = (chain: Chain) => {
@@ -52,7 +46,6 @@ export default function ChainSelector({ chainList, inline }: ChainSelectorProps)
     console.log('Selected chain:', chain);
   };
 
-  // Close the dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -79,17 +72,17 @@ export default function ChainSelector({ chainList, inline }: ChainSelectorProps)
       >
         {selectedChain && (
           <>
-          <img 
-            src={selectedChain.icon} 
-            alt={selectedChain.name} 
-            style={{ width: '20px', marginRight: '8px' }} 
-          />
-          {selectedChain.nativeCurrency && (
-            <span className={styles['chain-name']}> 
-              {`${selectedChain.name} (${selectedChain.nativeCurrency.symbol})`}
-            </span>
-          )}
-        </>
+            <img 
+              src={selectedChain.icon} 
+              alt={selectedChain.name} 
+              style={{ width: '20px', marginRight: '8px' }} 
+            />
+            {selectedChain.nativeCurrency && (
+              <span className={styles['chain-name']}> 
+                {`${selectedChain.name} (${selectedChain.nativeCurrency.symbol})`}
+              </span>
+            )}
+          </>
         )}
       </div>
 
@@ -98,9 +91,9 @@ export default function ChainSelector({ chainList, inline }: ChainSelectorProps)
           {validChains.map((chain) => (
             <li key={chain.id} onClick={() => handleSelect(chain)}>
               <img 
-              src={chain.icon} 
-              alt={chain.name} 
-              style={{ width: '20px', marginRight: '8px' }} 
+                src={chain.icon} 
+                alt={chain.name} 
+                style={{ width: '20px', marginRight: '8px' }} 
               />
               <span>{chain.name}</span>
               {chain.nativeCurrency && (

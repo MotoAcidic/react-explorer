@@ -1,16 +1,28 @@
-/* src/components/search-bar/SearchBar.module.css */
 .container {
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-  }
-  
-  .input {
-    padding: 8px;
-    font-size: 16px;
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.input {
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.log {
+  color: green;
+  margin-top: 10px;
+  font-size: 14px;
+}
