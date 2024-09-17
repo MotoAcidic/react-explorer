@@ -6,10 +6,11 @@ import { Chain } from '../../interfaces/Chain';
 
 interface ChainSelectorProps {
   chainList: Chain[];
+  onChainSwitch: (chain: Chain) => void;
   inline?: 'left' | 'right' | 'center';
 }
 
-export default function ChainSelector({ chainList, inline }: ChainSelectorProps) {
+export default function ChainSelector({ chainList, onChainSwitch, inline }: ChainSelectorProps) {
   const [selectedChain, setSelectedChain] = useState<Chain | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -44,6 +45,9 @@ export default function ChainSelector({ chainList, inline }: ChainSelectorProps)
     setIsOpen(false);
     localStorage.setItem('selectedChain', JSON.stringify(chain));
     console.log('Selected chain:', chain);
+    if (onChainSwitch) {
+      onChainSwitch(chain);
+    }
   };
 
   useEffect(() => {

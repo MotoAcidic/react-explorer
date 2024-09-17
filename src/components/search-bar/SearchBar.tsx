@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import styles from './SearchBar.module.css';
+import { Chain } from '../../interfaces/Chain';
 
-const SearchBar = ({ selectedChain }) => {
+interface SearchBarProps {
+  selectedChain: Chain;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ selectedChain }) => {
   const [input, setInput] = useState('');
   const [error, setError] = useState('');
 
@@ -16,17 +21,44 @@ const SearchBar = ({ selectedChain }) => {
     }
   
     console.log(`Validating input: "${input}" for chain: ${selectedChain.name}`);
-    console.log(`Address Pattern: ${selectedChain.addressPattern}, Type: ${typeof selectedChain.addressPattern}`);
+    console.log(`Address Pattern: ${selectedChain.addressPattern}`);
+    console.log(`Transaction Pattern: ${selectedChain.transactionPattern}`);
+    console.log(`Block Hash Pattern: ${selectedChain.blockHashPattern}`);
   
-    // Check if the input matches address pattern
-    if (selectedChain.addressPattern && selectedChain.addressPattern.test(input)) {
-      console.log(`Valid address for ${selectedChain.name}`);
+    const isAddressValid = selectedChain.addressPattern?.test(input);
+    const isBlockHeight = /^\d+$/.test(input);
+    const isBlockHashValid = selectedChain.blockHashPattern?.test(input);
+    const isTransactionValid = selectedChain.transactionPattern?.test(input);
+  
+    // At the start we add all networks where the address and the block hash look the same in regex 
+    // Stupid i know but it works for now (TFinch / MotoAcidic)
+    if (selectedChain.id === 'sol' && isAddressValid && isBlockHashValid) {
+      console.log(`Input could be either a valid address or a blockhash for ${selectedChain.name}.`);
       setError('');
+      // Decide how you want to handle this case in your application logic
+    } else if (isAddressValid) {
+      console.log('Input is a valid address.');
+      setError('');
+      // Proceed with address search logic
+    } else if (isBlockHeight) {
+      console.log('Input is a valid block height.');
+      setError('');
+      // Proceed with block height search logic
+    } else if (isBlockHashValid) {
+      console.log('Input is a valid block hash.');
+      setError('');
+      // Proceed with block hash search logic
+    } else if (isTransactionValid) {
+      console.log('Input is a valid transaction hash.');
+      setError('');
+      // Proceed with transaction search logic
     } else {
-      console.log('Input does not match the selected network’s format.');
-      setError('Input does not match the selected network’s format.');
+      console.log('Input does not match any known format.');
+      setError('Input does not match the selected network’s address, transaction hash, block hash, or block height format.');
     }
   };
+  
+  
   
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -41,7 +73,7 @@ const SearchBar = ({ selectedChain }) => {
           type="text"
           placeholder="Enter address, transaction hash..."
           value={input}
-          onChange={handleInputChange}  // Attach the handler here
+          onChange={handleInputChange}
         />
         <button type="submit">Search</button>
       </form>

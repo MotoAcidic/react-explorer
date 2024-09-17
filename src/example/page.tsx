@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
-import ChainSelector from "../../../src/components/chain-selector/ChainSelector";
-import SearchBar from "../../../src/components/search-bar/SearchBar";
-import { chains } from '../../../src/interfaces/chains'; // Example chain data
+"use client";
+
+import { useState } from 'react';
+import ChainSelector from '../../../src/components/chain-selector/ChainSelector';
+import SearchBar from '../../../src/components/search-bar/SearchBar';
+import { chains } from '../../../src/example/chains';
 
 export default function App() {
-  const [selectedChain, setSelectedChain] = useState(chains['eth']); // Default to Ethereum
-
-  const handleChainChange = (chain) => {
-    setSelectedChain(chain); // Update the ChainSelector with new chain
-  };
+  const [selectedChain, setSelectedChain] = useState(chains.btc);
 
   return (
     <div>
-      <ChainSelector chainList={Object.values(chains)} selectedChain={selectedChain} />
-      <SearchBar chains={chains} onChainChange={handleChainChange} />
+      <ChainSelector chainList={Object.values(chains)} onChainSwitch={setSelectedChain} />
+      <SearchBar selectedChain={selectedChain} chains={chains} />
     </div>
   );
 }

@@ -90,78 +90,82 @@ const evmNetwork: Network = {
 };
 
 // Define chains as an object
+// Have only verified the Bitcoin chain and Solana chain because im lazy but they work for address and tx hash(TFinch / MotoAcidic)
 const chains: Record<string, Chain> = {
-    btc: {
-      id: 'btc',
-      name: 'bitcoin_mainnet',
-      network: bitcoinNetwork,
-      addressPattern: /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/, // Bitcoin address pattern
-      transactionPattern: /^[a-fA-F0-9]{64}$/, // Bitcoin transaction hash pattern
-      nativeCurrency: {
-        name: 'Bitcoin',
-        symbol: 'BTC',
-        decimals: 8,
-      },
-      icon: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=035',
+  btc: {
+    id: 'btc',
+    name: 'bitcoin_mainnet',
+    network: bitcoinNetwork,
+    addressPattern: /^(1|3)[a-km-zA-HJ-NP-Z1-9]{25,34}$|^(bc1)[a-z0-9]{39,59}$/i,
+    transactionPattern: /^[a-fA-F0-9]{64}$/,
+    blockHashPattern: /^0{4,}[a-fA-F0-9]{60}$/,
+    nativeCurrency: {
+      name: 'Bitcoin',
+      symbol: 'BTC',
+      decimals: 8,
     },
-    sol: {
-        id: 'sol',
-        name: 'solana_mainnet',
-        network: solanaNetwork,
-        addressPattern: /^[1-9A-HJ-NP-Za-km-z]{32,44}$/, // Solana addresses have a valid base58 length
-        transactionPattern: /^[1-9A-HJ-NP-Za-km-z]{43,88}$/, // Solana transactions are base58-encoded
-        explorerUrl: 'https://explorer.solana.com',
-        apiUrl: 'https://api.solscan.io/',
-        nativeCurrency: {
-            name: 'Solana',
-            symbol: 'SOL',
-            decimals: 9,
-        },
-        icon: 'https://cryptologos.cc/logos/solana-sol-logo.png?v=035',
+    icon: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=035',
+  },
+  sol: {
+    id: 'sol',
+    name: 'solana_mainnet',
+    network: solanaNetwork,
+    addressPattern: /^[1-9A-HJ-NP-Za-km-z]{32,44}$/,
+    transactionPattern: /^[1-9A-HJ-NP-Za-km-z]{64,88}$/,
+    blockHashPattern: /^[1-9A-HJ-NP-Za-km-z]{43,44}$/, // Solana blockhash pattern EGMKXQpgxivFnrCQ9GiuUJkSWZMJPtihpSgyVK2FDQZD
+    nativeCurrency: {
+      name: 'Solana',
+      symbol: 'SOL',
+      decimals: 9,
     },
-        
-    eth: {
-      id: 'eth',
-      name: 'ethereum',
-      network: evmNetwork,
-      addressPattern: /^0x[a-fA-F0-9]{40}$/, // Ethereum address pattern
-      transactionPattern: /^0x[a-fA-F0-9]{64}$/, // Ethereum transaction hash pattern
-      nativeCurrency: {
-        name: 'Ethereum',
-        symbol: 'ETH',
-        decimals: 18,
-      },
-      icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=035',
+    icon: 'https://cryptologos.cc/logos/solana-sol-logo.png?v=035',
+  },
+  eth: {
+    id: 'eth',
+    name: 'ethereum',
+    network: evmNetwork,
+    addressPattern: /^0x[a-fA-F0-9]{40}$/,
+    transactionPattern: /^0x[a-fA-F0-9]{64}$/,
+    blockHashPattern: /^0x[a-fA-F0-9]{64}$/, // Ethereum block hash pattern
+    nativeCurrency: {
+      name: 'Ethereum',
+      symbol: 'ETH',
+      decimals: 18,
     },
-    base: {
-      id: 'base',
-      name: 'base_network',
-      network: evmNetwork,
-      chainId: 8453,
-      addressPattern: /^0x[a-fA-F0-9]{40}$/, // Base address pattern
-      transactionPattern: /^0x[a-fA-F0-9]{64}$/, // Base transaction hash pattern
-      nativeCurrency: {
-        name: 'Base',
-        symbol: 'ETH',
-        decimals: 18,
-      },
-      icon: 'https://cryptologos.cc/logos/base-coin-base-logo.png?v=035',
+    icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=035',
+  },
+  base: {
+    id: 'base',
+    name: 'base_network',
+    network: evmNetwork,
+    chainId: 8453,
+    addressPattern: /^0x[a-fA-F0-9]{40}$/,
+    transactionPattern: /^0x[a-fA-F0-9]{64}$/,
+    blockHashPattern: /^0x[a-fA-F0-9]{64}$/, // Base block hash pattern
+    nativeCurrency: {
+      name: 'Base',
+      symbol: 'ETH',
+      decimals: 18,
     },
-    pol: {
-      id: 'pol',
-      name: 'polygon_matic',
-      network: evmNetwork,
-      chainId: 137,
-      addressPattern: /^0x[a-fA-F0-9]{40}$/, // Polygon address pattern
-      transactionPattern: /^0x[a-fA-F0-9]{64}$/, // Polygon transaction hash pattern
-      nativeCurrency: {
-        name: 'Polygon',
-        symbol: 'POL',
-        decimals: 18,
-      },
-      icon: 'https://cryptologos.cc/logos/polygon-matic-logo.png?v=035',
+    icon: 'https://cryptologos.cc/logos/base-coin-base-logo.png?v=035',
+  },
+  pol: {
+    id: 'pol',
+    name: 'polygon_matic',
+    network: evmNetwork,
+    chainId: 137,
+    addressPattern: /^0x[a-fA-F0-9]{40}$/,
+    transactionPattern: /^0x[a-fA-F0-9]{64}$/,
+    blockHashPattern: /^0x[a-fA-F0-9]{64}$/, // Polygon block hash pattern
+    nativeCurrency: {
+      name: 'Polygon',
+      symbol: 'POL',
+      decimals: 18,
     },
-  };
+    icon: 'https://cryptologos.cc/logos/polygon-matic-logo.png?v=035',
+  },
+};
+
   
 
 export { chains };

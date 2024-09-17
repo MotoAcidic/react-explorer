@@ -32,6 +32,7 @@ export type Network = {
     transactionTypes: SupportedTypes[];
     addressPattern?: RegExp;
     transactionPattern?: RegExp;
+    blockHashPattern?: RegExp;
     checksumAddress?: (address: string) => string;
     supportsSmartContracts?: boolean;
 };
@@ -43,6 +44,7 @@ export type Chain = {
     chainId?: number;
     addressPattern?: RegExp;
     transactionPattern?: RegExp;
+    blockHashPattern?: RegExp;
     explorerUrl?: string;
     rpcUrl?: string;
     apiUrl?: string;
