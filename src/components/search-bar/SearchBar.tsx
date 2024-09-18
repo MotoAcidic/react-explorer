@@ -33,14 +33,19 @@ const SearchBar: React.FC<SearchBarProps> = ({ selectedChain, inline = 'center' 
     const isTransactionValid = selectedChain.transactionPattern?.test(input);
 
     if (selectedChain.id === 'sol' && isAddressValid && isBlockHashValid) {
+      console.log('Solana address or block hash detected for chain:', selectedChain.id);
       setError('');
     } else if (isAddressValid) {
+      console.log('Address detected for chain:', selectedChain.id);
       setError('');
     } else if (isBlockHeight) {
+      console.log('Block height detected for chain:', selectedChain.id);
       setError('');
     } else if (isBlockHashValid) {
+      console.log('Block hash detected for chain:', selectedChain.id);
       setError('');
     } else if (isTransactionValid) {
+      console.log('Transaction detected for chain:', selectedChain.id);
       setError('');
     } else {
       setError('Input does not match any known format.');
