@@ -24,33 +24,42 @@ const SearchBar: React.FC<SearchBarProps> = ({ selectedChain, inline = 'center' 
   const validateInput = () => {
     if (!selectedChain) {
       setError('Please select a chain.');
+      console.log('No chain selected.');
       return;
     }
-
+  
     const isAddressValid = selectedChain.addressPattern?.test(input);
     const isBlockHeight = /^\d+$/.test(input);
     const isBlockHashValid = selectedChain.blockHashPattern?.test(input);
     const isTransactionValid = selectedChain.transactionPattern?.test(input);
-
+  
+    console.log(`Selected Chain: ${selectedChain.name} (${selectedChain.nativeCurrency.symbol})`);
+    console.log(`Validating input: "${input}" for chain: ${selectedChain.name}`);
+    console.log(`Address Pattern: ${selectedChain.addressPattern}`);
+    console.log(`Transaction Pattern: ${selectedChain.transactionPattern}`);
+    console.log(`Block Hash Pattern: ${selectedChain.blockHashPattern}`);
+  
     if (selectedChain.id === 'sol' && isAddressValid && isBlockHashValid) {
-      console.log('Solana address or block hash detected for chain:', selectedChain.id);
+      console.log(`Input could be either a valid address or block hash for ${selectedChain.name}.`);
       setError('');
     } else if (isAddressValid) {
-      console.log('Address detected for chain:', selectedChain.id);
+      console.log(`Input is a valid address for ${selectedChain.name}.`);
       setError('');
     } else if (isBlockHeight) {
-      console.log('Block height detected for chain:', selectedChain.id);
+      console.log(`Input is a valid block height for ${selectedChain.name}.`);
       setError('');
     } else if (isBlockHashValid) {
-      console.log('Block hash detected for chain:', selectedChain.id);
+      console.log(`Input is a valid block hash for ${selectedChain.name}.`);
       setError('');
     } else if (isTransactionValid) {
-      console.log('Transaction detected for chain:', selectedChain.id);
+      console.log(`Input is a valid transaction hash for ${selectedChain.name}.`);
       setError('');
     } else {
-      setError('Input does not match any known format.');
+      console.log(`Input does not match any known format for ${selectedChain.name}.`);
+      setError('Input does not match the selected network’s address, transaction hash, block hash, or block height format.');
     }
   };
+  
 
   // Class for the input based on the inline prop (left, right, center)
   const inputClass =
